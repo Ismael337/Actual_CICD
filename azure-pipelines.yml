@@ -15,7 +15,7 @@ stages:
           versionType: 'AutoVersion'
           projectJsonPath: '$(Build.SourcesDirectory)\project.json'
           outputType: 'Process'
-          orchestratorConnection: 'UiPath DEV'
+          orchestratorConnection: 'Con_AzureDevOps_Orchestrator'
           outputPath: '$(Build.ArtifactStagingDirectory)'
       - publish: $(Build.ArtifactStagingDirectory)
         artifact: drop
@@ -28,7 +28,7 @@ stages:
         steps:
         - task: UiPathAssets@3
           inputs:
-            orchestratorConnection: 'UiPath DEV'
+            orchestratorConnection: 'Con_AzureDevOps_Orchestrator'
             folderName: 'MYAUBAY'
             assetActionType: 'Deploy'
             csvFile: '$(Build.SourcesDirectory)\Data\Assests.csv'
@@ -48,7 +48,7 @@ stages:
            steps:
             - task: UiPathDeploy@3
               inputs:
-                orchestratorConnection: 'UiPath DEV'
+                orchestratorConnection: 'Con_AzureDevOps_Orchestrator'
                 packagesPath: '$(Pipeline.Workspace)\drop\'
                 folderName: 'MYAUBAY'
                 
@@ -105,7 +105,7 @@ stages:
           - task: UiPathTest@3
             inputs:
               testTarget: 'TestSet'
-              orchestratorConnection: 'UiPATH RPABOTSWORLD'
+              orchestratorConnection: 'Con_AzureDevOps_Orchestrator'
               testSet: 'TS_CICD'
               folderName: 'MYAUBAY'
               testReportDestination: '$(Pipeline.Workspace)\drop\'
